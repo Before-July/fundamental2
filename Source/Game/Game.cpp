@@ -76,7 +76,10 @@ void CGame::draw()
     {
         value->draw();
     }
-    NewShape[WhichShape]->draw();
+    if (WhichShape < 4)
+    {
+        NewShape[WhichShape]->draw();
+    }
     DrawText(TextFormat("Shape: %d", AddShapes.size()), 5, 5, 40, DARKGRAY); // TextFormat here as const char* that DrawText can read
 }
 
@@ -126,8 +129,13 @@ void CGame::onKey(int keyCode, KeyState keyState)
         WhichShape = 3;
         NewShape[WhichShape]->resetScale();
     }
+    if (keyCode == KEY_FIVE && keyState == KeyState::Pressed)
+    {
+        WhichShape = 4;
+    }
+
     // Add scale
-    if (keyCode == KEY_B && keyState == KeyState::Pressed)
+    if (keyCode == KEY_B && keyState == KeyState::Pressed && WhichShape < 4)
     {
         NewShape[WhichShape]->addScale();
     }
@@ -170,7 +178,11 @@ void CGame::onMouseButton(int button, KeyState keyState)
 
 void CGame::onMouseMove(float x, float y)
 {
-    NewShape[WhichShape]->setPosition(x, y);
+    if (WhichShape < 4)
+    {
+        NewShape[WhichShape]->setPosition(x, y);
+    }
+    
 }
 
 Texture2D CGame::getTexture(const char* textureName) const
