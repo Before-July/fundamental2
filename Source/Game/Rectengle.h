@@ -12,7 +12,7 @@ public:
     void draw() override;
 
 private:
-    int Height;
-    int Width;
+    float Height;
+    float Width;
 };
 

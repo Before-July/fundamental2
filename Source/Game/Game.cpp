@@ -54,6 +54,15 @@ void CGame::update(float deltaTime)
 {
     Ball->update( deltaTime );
     Player->update();
+
+    for (auto value : AddShapes)
+    {
+        value->breathingScale();
+    }
+    for (auto value: NewShape)
+    {
+        value->breathingScale();
+    }
 }
 
 void CGame::draw()
@@ -72,6 +81,7 @@ void CGame::draw()
     //Player->draw(); // hide temporary
 
     // draw shapes
+
     for (auto value : AddShapes)
     {
         value->draw();
