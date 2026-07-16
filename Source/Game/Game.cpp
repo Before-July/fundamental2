@@ -28,6 +28,15 @@ CGame::CGame()
     NewShape[1] = new CCircle();
     NewShape[2] = new CTriangle();
     NewShape[3] = new CSakura();
+    // fill the array to show shapes
+    ShowShape[0] = new CRectengle();
+    ShowShape[1] = new CCircle();
+    ShowShape[2] = new CTriangle();
+    ShowShape[3] = new CSakura();
+    ShowShape[0]->setPosition(50, 200);
+    ShowShape[1]->setPosition(200, 200);
+    ShowShape[2]->setPosition(300, 200);
+    ShowShape[3]->setPosition(500, 200);
     reset();
 }
 
@@ -55,6 +64,10 @@ void CGame::update(float deltaTime)
     Ball->update( deltaTime );
     Player->update();
 
+    for (auto value : ShowShape)
+    {
+        value->breathingScale();
+    }
     for (auto value : AddShapes)
     {
         value->breathingScale();
@@ -81,7 +94,10 @@ void CGame::draw()
     //Player->draw(); // hide temporary
 
     // draw shapes
-
+    for (auto value: ShowShape)
+    {
+        value->draw();
+    }
     for (auto value : AddShapes)
     {
         value->draw();

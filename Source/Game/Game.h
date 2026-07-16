@@ -43,5 +43,6 @@ private:
 
     std::vector<CShape*> AddShapes;
     CShape* NewShape[4];
+    CShape* ShowShape[4];
     int WhichShape = 0;
 };
