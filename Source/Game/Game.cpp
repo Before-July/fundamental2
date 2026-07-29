@@ -59,10 +59,10 @@ void CGame::draw()
 
     if( Ball->isActive() )
     {
-        Ball->draw(); //hide temporary
+        Ball->draw(); 
     }
 
-    Player->draw(); // hide temporary
+    Player->draw();
 
 }
 
