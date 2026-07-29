@@ -1,6 +1,7 @@
 #pragma once
 #include "Helpers/Vector.h"
 #include "raylib.h"
+#include "Helpers/Sprite2D.h"
 
 
 class CGameObject // abstricte class 
@@ -21,5 +22,27 @@ protected:
     vec2 Scale = 4;
 
     Color ObjectColor = RED;
+};
+
+
+class CPlayer : public CGameObject
+{
+public:
+    CPlayer();
+    ~CPlayer();
+    void update() override;
+    void draw() override;
+
+    void setDirection(float dir) { Direction = dir; }
+
+    int getSpriteSize();
+
+private:
+
+    Texture2D Texture;
+    Sprite2D* Sprite;
+
+    float MoveSpeed = 10.0f;
+    float Direction = 0;
 };
 

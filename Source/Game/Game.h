@@ -9,8 +9,8 @@
 #include "Helpers/InputTypes.h"
 #include "Helpers/Vector.h"
 #include "Ball.h"
-#include "Player.h"
-#include "Shape.h"
+#include "GameObject.h"
+
 
 class CBall;
 class CPlayer;
@@ -41,8 +41,4 @@ private:
     CBall* Ball = nullptr;
     CPlayer* Player = nullptr;
 
-    std::vector<CShape*> AddShapes;
-    CShape* NewShape[4];
-    CShape* ShowShape[4];
-    int WhichShape = 0;
 };

@@ -1,6 +1,7 @@
 #include "raylib.h"
 
 #include "Game/Game.h"
+#include "Game/StampsGame.h"
 #include "Helpers/InputTypes.h"
 
 #if PLATFORM_WEB
@@ -12,13 +13,13 @@ void updateDrawFrame();
 static const int c_screenWidth = 1280;
 static const int c_screenHeight = 720;
 
-CGame* g_game = nullptr;
+CStampsGame* g_game = nullptr;
 
 int main()
 {
     InitWindow( c_screenWidth, c_screenHeight, "Game Window" );
 
-    g_game = new CGame();
+    g_game = new CStampsGame();
 
 #if PLATFORM_WEB
     emscripten_set_main_loop( updateDrawFrame, 0, 1 );

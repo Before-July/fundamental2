@@ -4,10 +4,6 @@
 #include <vector>
 
 #include "Game.h"
-#include "Rectengle.h"
-#include "Circle.h"
-#include "Triangle.h"
-#include "Sakura.h"
 #include "Helpers/MathFuncs.h"
 #include "Helpers/Sprite2D.h"
 
@@ -23,20 +19,7 @@ CGame::CGame()
     // Create a player.
     Player = new CPlayer;   
     Player->setPosition({ GetScreenWidth() / 2.0f , GetScreenHeight() - Player->getSpriteSize() * 2.0f });
-    // Fill the array of shapes
-    NewShape[0] = new CRectengle();
-    NewShape[1] = new CCircle();
-    NewShape[2] = new CTriangle();
-    NewShape[3] = new CSakura();
-    // fill the array to show shapes
-    ShowShape[0] = new CRectengle();
-    ShowShape[1] = new CCircle();
-    ShowShape[2] = new CTriangle();
-    ShowShape[3] = new CSakura();
-    ShowShape[0]->setPosition(50, 200);
-    ShowShape[1]->setPosition(200, 200);
-    ShowShape[2]->setPosition(300, 200);
-    ShowShape[3]->setPosition(500, 200);
+
     reset();
 }
 
@@ -64,18 +47,6 @@ void CGame::update(float deltaTime)
     Ball->update( deltaTime );
     Player->update();
 
-    for (auto value : ShowShape)
-    {
-        value->breathingScale();
-    }
-    for (auto value : AddShapes)
-    {
-        value->breathingScale();
-    }
-    for (auto value: NewShape)
-    {
-        value->breathingScale();
-    }
 }
 
 void CGame::draw()
@@ -88,25 +59,11 @@ void CGame::draw()
 
     if( Ball->isActive() )
     {
-        //Ball->draw(); //hide temporary
+        Ball->draw(); //hide temporary
     }
 
-    //Player->draw(); // hide temporary
+    Player->draw(); // hide temporary
 
-    // draw shapes
-    for (auto value: ShowShape)
-    {
-        value->draw();
-    }
-    for (auto value : AddShapes)
-    {
-        value->draw();
-    }
-    if (WhichShape < 4)
-    {
-        NewShape[WhichShape]->draw();
-    }
-    DrawText(TextFormat("Shape: %d", AddShapes.size()), 5, 5, 40, DARKGRAY); // TextFormat here as const char* that DrawText can read
 }
 
 void CGame::onKey(int keyCode, KeyState keyState)
@@ -114,8 +71,6 @@ void CGame::onKey(int keyCode, KeyState keyState)
     if( keyCode == 'R' && keyState == KeyState::Pressed )
     {
         reset();
-        // clear up the shape vector
-        AddShapes.clear();
     }
 
     // Send key events to the ball.
@@ -134,80 +89,16 @@ void CGame::onKey(int keyCode, KeyState keyState)
         Player->setDirection(1);
     }
 
-    // Switch shape 
-    if (keyCode == KEY_ONE && keyState == KeyState::Pressed)
-    {
-        WhichShape = 0;
-        NewShape[WhichShape]->resetScale();
-    }
-    if (keyCode == KEY_TWO && keyState == KeyState::Pressed)
-    {
-        WhichShape = 1;
-        NewShape[WhichShape]->resetScale();
-    }
-    if (keyCode == KEY_THREE && keyState == KeyState::Pressed)
-    {
-        WhichShape = 2;
-        NewShape[WhichShape]->resetScale();
-    }
-    if (keyCode == KEY_FOUR && keyState == KeyState::Pressed)
-    {
-        WhichShape = 3;
-        NewShape[WhichShape]->resetScale();
-    }
-    if (keyCode == KEY_FIVE && keyState == KeyState::Pressed)
-    {
-        WhichShape = 4;
-    }
-
-    // Add scale
-    if (keyCode == KEY_B && keyState == KeyState::Pressed && WhichShape < 4)
-    {
-        NewShape[WhichShape]->addScale();
-    }
-
 }
 
 
 void CGame::onMouseButton(int button, KeyState keyState)
 {
-    // click mouse to add shape
-    if (button==MouseButton::MOUSE_BUTTON_LEFT&& keyState==KeyState::Pressed)
-    {
-        if (WhichShape == 0)
-        {
-            CShape* add = new CRectengle();
-            *add = *NewShape[WhichShape];
-            AddShapes.push_back(add);
-        }
-        else if (WhichShape == 1)
-        {
-            CShape* add = new CCircle();
-            *add = *NewShape[WhichShape];
-            AddShapes.push_back(add);
-        }
-        else if (WhichShape == 2)
-        {
-            CShape* add = new CTriangle();
-            *add = *NewShape[WhichShape];
-            AddShapes.push_back(add);
-        }
-        else if (WhichShape == 3)
-        {
-            CShape* add = new CSakura();
-            *add = *NewShape[WhichShape];
-            AddShapes.push_back(add);
-        }
-    }
-   
+    
 }
 
 void CGame::onMouseMove(float x, float y)
 {
-    if (WhichShape < 4)
-    {
-        NewShape[WhichShape]->setPosition(x, y);
-    }
     
 }
 
@@ -223,3 +114,4 @@ Texture2D CGame::getTexture(const char* textureName) const
     assert( false );
     return Texture2D();
 }
+

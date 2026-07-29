@@ -194,20 +194,12 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Circle.cpp" />
     <ClCompile Include="Game\GameObject.cpp" />
     <ClCompile Include="Game\Shape.cpp" />
-    <ClCompile Include="Game\Rectengle.cpp" />
-    <ClCompile Include="Game\Player.cpp" />
-    <ClCompile Include="Game\Triangle.cpp" />
-    <ClCompile Include="Game\Sakura.cpp" />
-    <ClInclude Include="Game\Circle.h" />
+    <ClCompile Include="Game\StampsGame.cpp" />
     <ClInclude Include="Game\GameObject.h" />
     <ClInclude Include="Game\Shape.h" />
-    <ClInclude Include="Game\Rectengle.h" />
-    <ClInclude Include="Game\Player.h" />
-    <ClInclude Include="Game\Triangle.h" />
-    <ClInclude Include="Game\Sakura.h" />
+    <ClInclude Include="Game\StampsGame.h" />
     <None Include="..\.gitignore">
     </None>
     <ClInclude Include="Game\Ball.h" />
