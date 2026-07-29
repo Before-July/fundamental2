@@ -195,11 +195,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\GameObject.cpp" />
-    <ClCompile Include="Game\Shape.cpp" />
-    <ClCompile Include="Game\StampsGame.cpp" />
+    <ClCompile Include="StampsGame\Shape.cpp" />
+    <ClCompile Include="StampsGame\StampsGame.cpp" />
     <ClInclude Include="Game\GameObject.h" />
-    <ClInclude Include="Game\Shape.h" />
-    <ClInclude Include="Game\StampsGame.h" />
+    <ClInclude Include="StampsGame\Shape.h" />
+    <ClInclude Include="StampsGame\StampsGame.h" />
     <None Include="..\.gitignore">
     </None>
     <ClInclude Include="Game\Ball.h" />

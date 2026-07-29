@@ -1,7 +1,7 @@
 #include "raylib.h"
 
 #include "Game/Game.h"
-#include "Game/StampsGame.h"
+#include "StampsGame/StampsGame.h"
 #include "Helpers/InputTypes.h"
 
 #if PLATFORM_WEB

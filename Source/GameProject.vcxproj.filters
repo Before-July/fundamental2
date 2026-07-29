@@ -19,9 +19,9 @@
     <ClCompile Include="Game\Game.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Shape.cpp" />
+    <ClCompile Include="StampsGame\Shape.cpp" />
     <ClCompile Include="Game\GameObject.cpp" />
-    <ClCompile Include="Game\StampsGame.cpp" />
+    <ClCompile Include="StampsGame\StampsGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helpers\InputTypes.h">
@@ -45,9 +45,9 @@
     <ClInclude Include="Game\Game.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Shape.h" />
+    <ClInclude Include="StampsGame\Shape.h" />
     <ClInclude Include="Game\GameObject.h" />
-    <ClInclude Include="Game\StampsGame.h" />
+    <ClInclude Include="StampsGame\StampsGame.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
