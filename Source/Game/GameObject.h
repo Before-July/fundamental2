@@ -25,6 +25,7 @@ protected:
     float Angles = 0;
     vec2 Scale = 4;
     float Direction = 0;
+    bool flip = false;
     Color ObjectColor = RED;
 };
 

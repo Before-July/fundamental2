@@ -64,7 +64,15 @@ void CPlayer::update(float deltaTime)
     }
     else
     {
-
+        loadAnimation("run", 4, 10.0);
+        if(directionVec.X < 0 )
+        {
+            flip = true;
+        }
+        else
+        {
+            flip = false;
+        }
     }
 }
 
@@ -83,7 +91,7 @@ void CPlayer::draw()
         FrameCount = 0;
     }
 
-    Animation[FrameCount]->draw(Position, Angles, Scale);
+    Animation[FrameCount]->draw(Position, Angles, Scale, flip);
     
 }
 
