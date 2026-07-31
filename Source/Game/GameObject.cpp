@@ -64,7 +64,7 @@ void CPlayer::update(float deltaTime)
     }
     else
     {
-        loadAnimation("run", 4, 10.0);
+        loadAnimation("run", 4, 15.0);
         if(directionVec.X < 0 )
         {
             flip = true;
