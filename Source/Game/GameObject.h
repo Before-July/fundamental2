@@ -2,6 +2,9 @@
 #include "Helpers/Vector.h"
 #include "raylib.h"
 #include "Helpers/Sprite2D.h"
+#include "Helpers/InputTypes.h"
+#include <string>
+#include <vector>
 
 
 class CGameObject // abstricte class 
@@ -10,7 +13,8 @@ public:
     CGameObject();
     ~CGameObject();
 
-    virtual void update() = 0; // pure virtal function, must be override
+    virtual void onKey(int keyCode, KeyState keyState);
+    virtual void update(float deltaTime) = 0; // pure virtal function, must be override
     virtual void draw() = 0;
 
     vec2 getPosition();
@@ -20,7 +24,7 @@ protected:
     vec2 Position;
     float Angles = 0;
     vec2 Scale = 4;
-
+    float Direction = 0;
     Color ObjectColor = RED;
 };
 
@@ -30,19 +34,23 @@ class CPlayer : public CGameObject
 public:
     CPlayer();
     ~CPlayer();
-    void update() override;
+    void update(float deltaTime) override;
     void draw() override;
 
-    void setDirection(float dir) { Direction = dir; }
-
+    //void setDirection(float dir) { Direction = dir; }
     int getSpriteSize();
+    void loadAnimation(std::string ani_name, int num_frame, float fps);
 
 private:
 
     Texture2D Texture;
     Sprite2D* Sprite;
-
-    float MoveSpeed = 10.0f;
-    float Direction = 0;
+    std::vector<Sprite2D*> Animation;
+    
+    float AnimationFPS = 0.0f;
+    float AnimationTimer = 0.0f;
+    int FrameCount = 0;
+    float MoveSpeed = 300.0f;
+    
 };
 
