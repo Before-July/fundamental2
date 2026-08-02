@@ -39,6 +39,9 @@ private:
     std::unordered_map<std::string, Texture2D> Textures;
 
     CBall* Ball = nullptr;
-    CPlayer* Player = nullptr;
 
+    CPlayer* Player = nullptr;
+    CCollision* PlayerCollision = nullptr;
+
+    CFloor* Floor = nullptr;
 };

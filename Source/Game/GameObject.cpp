@@ -45,6 +45,7 @@ CPlayer::CPlayer()
 {
     Texture = LoadTexture("Data/Textures/Samurai.png");
     Sprite = new Sprite2D(Texture);
+
 }
 
 CPlayer::~CPlayer()
@@ -92,7 +93,7 @@ void CPlayer::draw()
     }
 
     Animation[FrameCount]->draw(Position, Angles, Scale, flip);
-    
+
 }
 
 int CPlayer::getSpriteSize()
@@ -119,4 +120,50 @@ void CPlayer::loadAnimation(std::string ani_name, int num_frame, float fps)
         Animation.push_back(frameSprite);
     }
     
+}
+
+
+CFloor::CFloor()
+{
+    Position.X = GetScreenWidth() / 2.0;
+    Position.Y = GetScreenHeight();
+    TopLeft = vec2(0.0, GetScreenHeight() - 10.0);
+    TopRight = vec2(GetScreenWidth(), GetScreenHeight() - 10.0);
+    BottomLeft = vec2(0.0, GetScreenHeight());
+    BottomRight = vec2(GetScreenWidth(), GetScreenHeight());
+    Collision = new CCollision();
+    Collision->setCollision(TopLeft, TopRight, BottomLeft, BottomRight);
+}
+
+CFloor::~CFloor()
+{
+}
+
+vec2 CFloor::getPoint(int whichPoint)
+{
+    switch (whichPoint)
+    {
+    case 1:
+        return TopLeft;
+        break;
+    case 2:
+        return TopRight;
+        break;
+    case 3:
+        return BottomLeft;
+        break;
+    case 4:
+        return BottomRight;
+        break;
+    default:
+        break;
+    }
+    return vec2();
+}
+
+
+void CFloor::draw()
+{
+    DrawRectangle(0.0, GetScreenHeight() - 10, GetScreenWidth(), 10, BLUE);
+    Collision->drawCollision(RED);
 }

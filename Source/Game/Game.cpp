@@ -14,11 +14,17 @@ CGame::CGame()
 
     Textures["SoccerBall"] = LoadTexture( "Data/Textures/SoccerBall.png" );
 
+    // Create floor
+    Floor = new CFloor();
+
+
     // Create a ball.
     Ball = new CBall(this);
     // Create a player.
     Player = new CPlayer;   
     Player->setPosition({ GetScreenWidth() / 2.0f , GetScreenHeight() - Player->getSpriteSize() * 2.0f });
+    PlayerCollision = new CCollision();
+
 
     reset();
 }
@@ -46,6 +52,13 @@ void CGame::update(float deltaTime)
 {
     Ball->update( deltaTime );
     Player->update( deltaTime );
+    PlayerCollision->setCollision
+    (
+        { (Player->getPosition().X - 30),(Player->getPosition().Y - 60)},
+        { (Player->getPosition().X + 30),(Player->getPosition().Y - 60) },
+        { (Player->getPosition().X - 30),(Player->getPosition().Y + 64) },
+        { (Player->getPosition().X + 30),(Player->getPosition().Y + 64) }
+    );
 
 }
 
@@ -61,9 +74,17 @@ void CGame::draw()
     {
         Ball->draw(); 
     }
-
+    Floor->draw();
     Player->draw();
-
+    if (PlayerCollision->is_colliding(Floor->getPoint(1).X,Floor->getPoint(2).X,Floor->getPoint(1).Y,Floor->getPoint(3).Y))
+    {
+        PlayerCollision->drawCollision(RED);
+    }
+    else
+    {
+        PlayerCollision->drawCollision(GREEN);
+    }
+    
 }
 
 void CGame::onKey(int keyCode, KeyState keyState)

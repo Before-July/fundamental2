@@ -3,9 +3,11 @@
 #include "raylib.h"
 #include "Helpers/Sprite2D.h"
 #include "Helpers/InputTypes.h"
+#include "Collision.h"
 #include <string>
 #include <vector>
 
+class CCollision;
 
 class CGameObject // abstricte class 
 { 
@@ -52,6 +54,24 @@ private:
     float AnimationTimer = 0.0f;
     int FrameCount = 0;
     float MoveSpeed = 300.0f;
-    
+
+};
+
+class CFloor
+{
+public:
+    CFloor();
+    ~CFloor();
+    vec2 getPoint(int whichPoint);
+    void draw();
+
+private:
+    vec2 Position;
+    vec2 TopLeft;
+    vec2 TopRight;
+    vec2 BottomLeft;
+    vec2 BottomRight;
+    CCollision* Collision;
+
 };
 
