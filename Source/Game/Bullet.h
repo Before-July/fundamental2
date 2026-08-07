@@ -9,21 +9,22 @@ class Sprite2D;
 class CBullet
 {
 public:
-	CBullet(vec2 postion);
+	CBullet();
 	~CBullet();
 
 	void draw();
 	void update(float deltaTime);
 	vec2 getPosition();
 
-
+	void set_shooting_position(vec2 position);
+	void set_Is_shooting(bool is_shooting);
+	bool get_Is_shooting() const;
 private:
 	vec2 Position;
 	float VelocityY = -400.0f;
 
 	float Angles = 0.0f;
-	vec2 Scale = 2;
-
+	vec2 Scale = 3;
 
 	Texture2D Texture;
 	Sprite2D* Sprite;
@@ -33,4 +34,6 @@ private:
 	float Animation_timer = 0.0f;
 	float Animation_fPS = 3.0f;
 	int Frame_count = 0;
+
+	bool Is_shooting = false;
 };

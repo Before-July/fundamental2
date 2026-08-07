@@ -38,6 +38,8 @@ public:
 
 private:
 
+    const int num_bullet = 3;
+
     std::unordered_map<std::string, Texture2D> Textures;
 
     CPlayer* Player = nullptr;
@@ -45,7 +47,8 @@ private:
     std::vector<CBall*> BallPool;
     std::vector<CBall*> ActiveBall;
 
-    CBullet* bullet = nullptr;
+    //CBullet* bullet = nullptr;
+    std::vector<CBullet*> Bullet;
 
     static const int num_MaxBalls = 20;
 };

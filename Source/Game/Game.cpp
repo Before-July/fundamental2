@@ -31,7 +31,11 @@ CGame::CGame()
     Player = new CPlayer;   
     Player->setPosition({ GetScreenWidth() / 2.0f , GetScreenHeight() - Player->getSpriteSize() * 2.0f });
 
-
+    for (int i = 0; i < num_bullet; i++)
+    {
+        CBullet* addbullet = new CBullet;
+        Bullet.push_back(addbullet);
+    }
 
     reset();
 }
@@ -72,11 +76,21 @@ void CGame::update(float deltaTime)
     {
         value->update(deltaTime);
     }
-    if (bullet != nullptr)
+    //if (bullet != nullptr)
+    //{
+    //    bullet->update(deltaTime);
+    //}
+    for (auto bullet : Bullet)
     {
-        bullet->update(deltaTime);
+        if (bullet->get_Is_shooting())
+        {
+            bullet->update(deltaTime);
+        }
+        if (bullet->getPosition().Y < 64.0f)
+        {
+            bullet->set_Is_shooting(false);
+        }
     }
-
 }
 
 void CGame::draw()
@@ -92,9 +106,16 @@ void CGame::draw()
     {
         value->draw();
     }
-    if (bullet != nullptr)
+    //if (bullet != nullptr)
+    //{
+    //    bullet->draw();
+    //}
+    for (auto bullet : Bullet)
     {
-        bullet->draw();
+        if (bullet->get_Is_shooting())
+        {
+            bullet->draw();
+        }
     }
 }
 
@@ -114,7 +135,17 @@ void CGame::onKey(int keyCode, KeyState keyState)
 
     if (keyCode == KEY_J && keyState == KeyState::Pressed)
     {
-        bullet = new CBullet(Player->getPosition());
+        //bullet = new CBullet(Player->getPosition());
+        for (auto bullet : Bullet)
+        {
+            if (!bullet->get_Is_shooting())
+            {
+                bullet->set_shooting_position(Player->getPosition());
+                bullet->set_Is_shooting(true);
+                break;
+            }
+            
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 
-CBullet::CBullet(vec2 position) : Position(position)
+CBullet::CBullet()
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -21,26 +21,33 @@ CBullet::~CBullet()
 
 void CBullet::draw()
 {
-    Animation_timer = Animation_timer + (1 / 60.0f);
-    if (Animation_timer >= 1 / Animation_fPS)
+    if (Is_shooting)
     {
-        Frame_count += 1;
-        Animation_timer = 0.0f;
-    }
+        Animation_timer = Animation_timer + (1 / 60.0f);
+        if (Animation_timer >= 1 / Animation_fPS)
+        {
+            Frame_count += 1;
+            Animation_timer = 0.0f;
+        }
 
-    //Sprite->draw(Position, Angles, Scale);
-    if (Frame_count == Animation.size())
-    {
-        Frame_count = 0;
-    }
+        //Sprite->draw(Position, Angles, Scale);
+        if (Frame_count == Animation.size())
+        {
+            Frame_count = 0;
+        }
 
-    Animation[Frame_count]->draw(Position, Angles, Scale);
+        Animation[Frame_count]->draw(Position, Angles, Scale);
+    }
     
 }
 
 void CBullet::update(float deltaTime)
 {
-    Position.Y += VelocityY * deltaTime;
+    if (Is_shooting)
+    {
+        Position.Y += VelocityY * deltaTime;
+    }
+   
 }
 
 
@@ -48,5 +55,20 @@ void CBullet::update(float deltaTime)
 vec2 CBullet::getPosition()
 {
     return Position;
+}
+
+void CBullet::set_shooting_position(vec2 position)
+{
+    Position = position;
+}
+
+void CBullet::set_Is_shooting(bool is_shooting)
+{
+    Is_shooting = is_shooting;
+}
+
+bool CBullet::get_Is_shooting() const
+{
+    return Is_shooting;
 }
 
