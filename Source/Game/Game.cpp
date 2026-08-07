@@ -14,10 +14,14 @@ CGame::CGame()
 
     Textures["SoccerBall"] = LoadTexture( "Data/Textures/SoccerBall.png" );
 
-
-
     // Create a ball.
-    Ball = new CBall(this);
+    for (int i = 0; i < num_MaxBalls; i++)
+    {
+        CBall* ball = new CBall(this);
+        BallPool.push_back(ball);
+    }
+    spawnBall(vec2(400, 300));
+
     // Create a player.
     Player = new CPlayer;   
     Player->setPosition({ GetScreenWidth() / 2.0f , GetScreenHeight() - Player->getSpriteSize() * 2.0f });
@@ -29,7 +33,14 @@ CGame::CGame()
 
 CGame::~CGame()
 {
-    delete Ball;
+    for (auto value: BallPool)
+    {
+        delete value;
+    }
+    for (auto value: ActiveBall)
+    {
+        delete value;
+    }
     delete Player;
 
     for( auto texturePair : Textures )
@@ -40,18 +51,20 @@ CGame::~CGame()
 
 void CGame::reset()
 {
-    Ball->reset();
-    Ball->setActive( true );
-    Ball->setPosition( { GetScreenWidth()/2.0f + rand() % 100 - 50, GetScreenHeight()/2.0f + rand() % 20 - 10 } );
-    Ball->setVelocity( {randFloat(-200, 200), randFloat(-200, 200)} );
+    //Ball->reset();
+    //Ball->setPosition( { GetScreenWidth()/2.0f + rand() % 100 - 50, GetScreenHeight()/2.0f + rand() % 20 - 10 } );
+    //Ball->setVelocity( {randFloat(-200, 200), randFloat(-200, 200)} );
 }
 
 void CGame::update(float deltaTime)
 {
-    Ball->update( deltaTime );
+
     Player->update( deltaTime );
     
- 
+    for (auto value : ActiveBall)
+    {
+        value->update(deltaTime);
+    }
 
 }
 
@@ -59,17 +72,15 @@ void CGame::draw()
 {
     ClearBackground( WHITE );
 
-    char buffer[64];
-    snprintf( buffer, sizeof(buffer), "Ball Pos: %0.0f, %0.0f", Ball->getPosition().X, Ball->getPosition().Y );
+    //char buffer[64];
+    //snprintf( buffer, sizeof(buffer), "Ball Pos: %0.0f, %0.0f", Ball->getPosition().X, Ball->getPosition().Y );
     
-
-    if( Ball->isActive() )
-    {
-        Ball->draw(); 
-    }
-
     Player->draw();
 
+    for (auto value : ActiveBall)
+    {
+        value->draw();
+    }
     
 }
 
@@ -81,10 +92,10 @@ void CGame::onKey(int keyCode, KeyState keyState)
     }
 
     // Send key events to the ball.
-    if( Ball->isActive() )
-    {
-        Ball->onKey( keyCode, keyState );
-    }
+    //if( Ball->isActive() )
+    //{
+    //    Ball->onKey( keyCode, keyState );
+    //}
     Player->onKey(keyCode, keyState);
 }
 
@@ -97,6 +108,23 @@ void CGame::onMouseButton(int button, KeyState keyState)
 void CGame::onMouseMove(float x, float y)
 {
     
+}
+
+CBall* CGame::spawnBall(vec2 position)
+{
+    if (BallPool.empty())
+    {
+        return nullptr;
+    }
+
+    // Activate 1 ball.
+    CBall* ball = BallPool.back();
+    BallPool.pop_back();
+    ActiveBall.push_back(ball);
+
+    ball->setPosition(position);
+
+    return ball;
 }
 
 Texture2D CGame::getTexture(const char* textureName) const

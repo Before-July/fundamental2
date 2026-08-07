@@ -32,7 +32,7 @@ protected:
     Color ObjectColor = RED;
     bool CanDash = false;
     float DashTimer = 0.1f;
-    float DashCoolDownTimer = 0.3f;
+    float DashCoolDownTimer = 0.4f;
 };
 
 

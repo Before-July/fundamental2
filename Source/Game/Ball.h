@@ -18,11 +18,8 @@ public:
     void update(float deltaTime);
     void draw();
 
-    // Input event methods.
-    void onKey(int keyCode, KeyState keyState);
 
     // Getters.
-    bool isActive()    { return Active; }
     vec2 getPosition() { return Position; }
     float getAngle()   { return Angle; }
     vec2 getScale()    { return Scale; }
@@ -31,7 +28,6 @@ public:
 	vec2 getVelocity() { return Velocity; }
 
     // Setters.
-    void setActive(bool active)  { Active = active; }
     void setPosition(vec2 pos)   { Position = pos; }
     void setAngle(float angle)   { Angle = angle; }
     void setScale(vec2 scale)    { Scale = scale; }

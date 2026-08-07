@@ -21,7 +21,7 @@ CBall::~CBall()
 
 void CBall::reset()
 {
-    setActive( false );
+
 }
 
 void CBall::update(float deltaTime)
@@ -79,32 +79,3 @@ void CBall::draw()
     Sprite->draw( Position, Angle, Scale );
 }
 
-void CBall::onKey(int keyCode, KeyState keyState)
-{
-    if( IsWindowFocused() == false )
-        Controls = 0;
-
-    if( keyState == KeyState::Pressed )
-    {
-        if( keyCode == KEY_UP || keyCode == 'W' )
-            Controls.Y -= 1;
-        if( keyCode == KEY_DOWN || keyCode == 'S' )
-            Controls.Y += 1;
-        if( keyCode == KEY_LEFT || keyCode == 'A' )
-            Controls.X -= 1;
-        if( keyCode == KEY_RIGHT || keyCode == 'D' )
-            Controls.X += 1;
-    }
-
-    if( keyState == KeyState::Released )
-    {
-        if( keyCode == KEY_UP || keyCode == 'W' )
-            Controls.Y += 1;
-        if( keyCode == KEY_DOWN || keyCode == 'S' )
-            Controls.Y -= 1;
-        if( keyCode == KEY_LEFT || keyCode == 'A' )
-            Controls.X += 1;
-        if( keyCode == KEY_RIGHT || keyCode == 'D' )
-            Controls.X -= 1;
-    }
-}

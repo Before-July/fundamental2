@@ -31,17 +31,17 @@ public:
     void onMouseMove(float x, float y);
 
     // Getters.
-    CBall* getBall() { return Ball; }
+    CBall* spawnBall(vec2 position);
 
     Texture2D getTexture(const char* textureName) const;
 
 private:
     std::unordered_map<std::string, Texture2D> Textures;
 
-    CBall* Ball = nullptr;
-
     CPlayer* Player = nullptr;
     
+    std::vector<CBall*> BallPool;
+    std::vector<CBall*> ActiveBall;
 
-    
+    static const int num_MaxBalls = 20;
 };
