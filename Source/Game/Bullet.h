@@ -21,7 +21,7 @@ public:
 	bool get_Is_shooting() const;
 private:
 	vec2 Position;
-	float VelocityY = -400.0f;
+	float VelocityY = -500.0f;
 
 	float Angles = 0.0f;
 	vec2 Scale = 3;

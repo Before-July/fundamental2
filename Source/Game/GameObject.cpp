@@ -115,7 +115,7 @@ void CPlayer::update(float deltaTime)
             if (DashCoolDownTimer < 0.0f)
             {
                 DashTimer = 0.1f;
-                DashCoolDownTimer == 0.0f;
+                DashCoolDownTimer = 0.0f;
             }
         }
     }
@@ -149,20 +149,24 @@ int CPlayer::getSpriteSize()
 void CPlayer::loadAnimation(std::string ani_name, int num_frame, float fps)
 {
     AnimationFPS = fps;
-    if (Animation.size() > 0)
+    if (Ani_name != ani_name)
     {
-        for (auto frame : Animation)
+        Ani_name = ani_name;
+        if (Animation.size() > 0)
         {
-            delete frame;
+            for (auto frame : Animation)
+            {
+                delete frame;
+            }
+            Animation.clear();
         }
-        Animation.clear();
-    }
-    for (int i = 0; i < num_frame; i++)
-    {
-        std::string frame_path = "Data/Textures/" + ani_name + std::to_string(i) + ".png";
-        Texture2D loadFrame = LoadTexture(frame_path.c_str());
-        Sprite2D* frameSprite = new Sprite2D(loadFrame);
-        Animation.push_back(frameSprite);
+        for (int i = 0; i < num_frame; i++)
+        {
+            std::string frame_path = "Data/Textures/" + ani_name + std::to_string(i) + ".png";
+            Texture2D loadFrame = LoadTexture(frame_path.c_str());
+            Sprite2D* frameSprite = new Sprite2D(loadFrame);
+            Animation.push_back(frameSprite);
+        }
     }
     
 }
@@ -171,7 +175,7 @@ void CPlayer::attack(float deltaTime)
 {
     loadAnimation("attack", 4, 4.0f);
     AttackTimer += deltaTime;
-    if (AttackTimer > 0.8f)
+    if (AttackTimer > 0.6f)
     {
         Is_attacking = false;
     }

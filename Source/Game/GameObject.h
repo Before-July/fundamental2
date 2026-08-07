@@ -67,6 +67,7 @@ private:
     
     bool Is_attacking = false;
     float AttackTimer = 0.0f;
+    std::string Ani_name = "null";
 };
 
 class CBlock
