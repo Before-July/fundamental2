@@ -61,56 +61,65 @@ CPlayer::~CPlayer()
 
 void CPlayer::update(float deltaTime)
 {
-    
     if (Direction != 0)
     {
         faceDirection.X = Direction;
     }
-    if(Direction == 0)
+    if (Is_attacking)
     {
-        loadAnimation("idle", 4, 3.0f);
+        attack(deltaTime);
+        
     }
     else
     {
-        loadAnimation("run", 4, 15.0f);
-        if(faceDirection.X < 0 )
+        AttackTimer = 0.0f;
+        if (Direction == 0)
         {
-            flip = true;
+            loadAnimation("idle", 4, 3.0f);
         }
         else
         {
-            flip = false;
+            loadAnimation("run", 4, 15.0f);
+            if (faceDirection.X < 0)
+            {
+                flip = true;
+            }
+            else
+            {
+                flip = false;
+            }
         }
-    }
-    if (Position.X < 11.0f * Scale.X)
-    {
-        Position.X = 11.0f * Scale.X;
-    }
-    else if (Position.X >= GetScreenWidth() - 11.0f * Scale.X)
-    {
-        Position.X = GetScreenWidth() - 11.0f * Scale.X;
-    }
-    if (CanDash && DashTimer > 0.0f)
-    {
-        Position.X += faceDirection.X * DashSpeed * deltaTime;
-        DashTimer -= deltaTime;
-        loadAnimation("run", 4, 15.0f);
-        if (DashTimer <= 0.0f) // finish dash
+        if (Position.X < 11.0f * Scale.X)
         {
-            CanDash = false;
-            DashCoolDownTimer = 0.3f;
+            Position.X = 11.0f * Scale.X;
         }
-    }
-    else
-    {
-        Position.X += Direction * MoveSpeed * deltaTime;
-        DashCoolDownTimer -= deltaTime;
-        if (DashCoolDownTimer < 0.0f)
+        else if (Position.X >= GetScreenWidth() - 11.0f * Scale.X)
         {
-            DashTimer = 0.1f;
-            DashCoolDownTimer == 0.0f;
+            Position.X = GetScreenWidth() - 11.0f * Scale.X;
+        }
+        if (CanDash && DashTimer > 0.0f)
+        {
+            Position.X += faceDirection.X * DashSpeed * deltaTime;
+            DashTimer -= deltaTime;
+            loadAnimation("run", 4, 15.0f);
+            if (DashTimer <= 0.0f) // finish dash
+            {
+                CanDash = false;
+                DashCoolDownTimer = 0.3f;
+            }
+        }
+        else
+        {
+            Position.X += Direction * MoveSpeed * deltaTime;
+            DashCoolDownTimer -= deltaTime;
+            if (DashCoolDownTimer < 0.0f)
+            {
+                DashTimer = 0.1f;
+                DashCoolDownTimer == 0.0f;
+            }
         }
     }
+
 }
 
 void CPlayer::draw()
@@ -156,6 +165,26 @@ void CPlayer::loadAnimation(std::string ani_name, int num_frame, float fps)
         Animation.push_back(frameSprite);
     }
     
+}
+
+void CPlayer::attack(float deltaTime)
+{
+    loadAnimation("attack", 4, 4.0f);
+    AttackTimer += deltaTime;
+    if (AttackTimer > 0.8f)
+    {
+        Is_attacking = false;
+    }
+}
+
+void CPlayer::set_is_attacking(bool is_attacking)
+{
+    Is_attacking = is_attacking;
+}
+
+bool CPlayer::get_is_attacking()
+{
+    return Is_attacking;
 }
 
 

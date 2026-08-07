@@ -86,7 +86,7 @@ void CGame::update(float deltaTime)
         {
             bullet->update(deltaTime);
         }
-        if (bullet->getPosition().Y < 64.0f)
+        if (bullet->getPosition().Y < -64.0f)
         {
             bullet->set_Is_shooting(false);
         }
@@ -138,8 +138,9 @@ void CGame::onKey(int keyCode, KeyState keyState)
         //bullet = new CBullet(Player->getPosition());
         for (auto bullet : Bullet)
         {
-            if (!bullet->get_Is_shooting())
+            if (!bullet->get_Is_shooting() && !Player->get_is_attacking())
             {
+                Player->set_is_attacking(true);
                 bullet->set_shooting_position(Player->getPosition());
                 bullet->set_Is_shooting(true);
                 break;

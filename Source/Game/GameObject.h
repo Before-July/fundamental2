@@ -48,6 +48,9 @@ public:
     int getSpriteSize();
     void loadAnimation(std::string ani_name, int num_frame, float fps);
 
+    void attack(float deltaTime);
+    void set_is_attacking(bool is_attacking);
+    bool get_is_attacking();
     // collision
 
 private:
@@ -62,6 +65,8 @@ private:
     float MoveSpeed = 300.0f;
     float DashSpeed = 2000.0f;
     
+    bool Is_attacking = false;
+    float AttackTimer = 0.0f;
 };
 
 class CBlock
