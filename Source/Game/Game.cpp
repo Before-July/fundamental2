@@ -20,7 +20,12 @@ CGame::CGame()
         CBall* ball = new CBall(this);
         BallPool.push_back(ball);
     }
-    spawnBall(vec2(400, 300));
+    for (int i = 0; i < 6; i++)
+    {
+        float positionX = randFloat(50.0f, (GetScreenWidth() - 50.0f));
+        spawnBall(vec2(positionX, 150), vec2(300, -300));
+    }
+    
 
     // Create a player.
     Player = new CPlayer;   
@@ -36,10 +41,12 @@ CGame::~CGame()
     for (auto value: BallPool)
     {
         delete value;
+        value = nullptr;
     }
     for (auto value: ActiveBall)
     {
         delete value;
+        value = nullptr;
     }
     delete Player;
 
@@ -110,7 +117,7 @@ void CGame::onMouseMove(float x, float y)
     
 }
 
-CBall* CGame::spawnBall(vec2 position)
+CBall* CGame::spawnBall(vec2 position, vec2 velocity)
 {
     if (BallPool.empty())
     {
@@ -123,6 +130,7 @@ CBall* CGame::spawnBall(vec2 position)
     ActiveBall.push_back(ball);
 
     ball->setPosition(position);
+    ball->setVelocity(velocity);
 
     return ball;
 }

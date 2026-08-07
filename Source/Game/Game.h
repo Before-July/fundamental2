@@ -31,7 +31,7 @@ public:
     void onMouseMove(float x, float y);
 
     // Getters.
-    CBall* spawnBall(vec2 position);
+    CBall* spawnBall(vec2 position, vec2 velocity);
 
     Texture2D getTexture(const char* textureName) const;
 

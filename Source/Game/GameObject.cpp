@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Helpers/Drawing.h"
+#include "Helpers/MathFuncs.h"
 
 
 CGameObject::CGameObject()
