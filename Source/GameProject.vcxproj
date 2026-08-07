@@ -194,10 +194,12 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Bullet.cpp" />
     <ClCompile Include="Game\Collision.cpp" />
     <ClCompile Include="Game\GameObject.cpp" />
     <ClCompile Include="StampsGame\Shape.cpp" />
     <ClCompile Include="StampsGame\StampsGame.cpp" />
+    <ClInclude Include="Game\Bullet.h" />
     <ClInclude Include="Game\Collision.h" />
     <ClInclude Include="Game\GameObject.h" />
     <ClInclude Include="StampsGame\Shape.h" />

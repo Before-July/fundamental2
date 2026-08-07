@@ -68,11 +68,11 @@ void CPlayer::update(float deltaTime)
     }
     if(Direction == 0)
     {
-        loadAnimation("idle", 4, 3.0);
+        loadAnimation("idle", 4, 3.0f);
     }
     else
     {
-        loadAnimation("run", 4, 15.0);
+        loadAnimation("run", 4, 15.0f);
         if(faceDirection.X < 0 )
         {
             flip = true;
@@ -94,7 +94,7 @@ void CPlayer::update(float deltaTime)
     {
         Position.X += faceDirection.X * DashSpeed * deltaTime;
         DashTimer -= deltaTime;
-        loadAnimation("run", 4, 15.0);
+        loadAnimation("run", 4, 15.0f);
         if (DashTimer <= 0.0f) // finish dash
         {
             CanDash = false;
@@ -108,14 +108,14 @@ void CPlayer::update(float deltaTime)
         if (DashCoolDownTimer < 0.0f)
         {
             DashTimer = 0.1f;
-            DashCoolDownTimer == 0.0;
+            DashCoolDownTimer == 0.0f;
         }
     }
 }
 
 void CPlayer::draw()
 {
-    AnimationTimer = AnimationTimer + 1 / 60.0;
+    AnimationTimer = AnimationTimer + 1 / 60.0f;
     if (AnimationTimer >= 1 / AnimationFPS)
     {
         FrameCount += 1;

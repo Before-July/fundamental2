@@ -10,6 +10,7 @@
 #include "Helpers/Vector.h"
 #include "Ball.h"
 #include "GameObject.h"
+#include "Bullet.h"
 
 
 class CBall;
@@ -36,12 +37,15 @@ public:
     Texture2D getTexture(const char* textureName) const;
 
 private:
+
     std::unordered_map<std::string, Texture2D> Textures;
 
     CPlayer* Player = nullptr;
     
     std::vector<CBall*> BallPool;
     std::vector<CBall*> ActiveBall;
+
+    CBullet* bullet = nullptr;
 
     static const int num_MaxBalls = 20;
 };

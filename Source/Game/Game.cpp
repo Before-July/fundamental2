@@ -72,6 +72,10 @@ void CGame::update(float deltaTime)
     {
         value->update(deltaTime);
     }
+    if (bullet != nullptr)
+    {
+        bullet->update(deltaTime);
+    }
 
 }
 
@@ -88,7 +92,10 @@ void CGame::draw()
     {
         value->draw();
     }
-    
+    if (bullet != nullptr)
+    {
+        bullet->draw();
+    }
 }
 
 void CGame::onKey(int keyCode, KeyState keyState)
@@ -104,6 +111,11 @@ void CGame::onKey(int keyCode, KeyState keyState)
     //    Ball->onKey( keyCode, keyState );
     //}
     Player->onKey(keyCode, keyState);
+
+    if (keyCode == KEY_J && keyState == KeyState::Pressed)
+    {
+        bullet = new CBullet(Player->getPosition());
+    }
 }
 
 

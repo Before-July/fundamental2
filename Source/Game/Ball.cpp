@@ -50,25 +50,25 @@ void CBall::update(float deltaTime)
     
 
     // Lock to edges.
-    if( Position.X < 32.0f )
+    if (Position.X < 32.0f * Scale.X)
     {
-        Position.X = 32.0f;
+        Position.X = 32.0f * Scale.X;
         Velocity.X *= -0.95f; // Bounce off the left edge.
     }
-    if( Position.X >= GetScreenWidth()-32.0f )
+    if( Position.X >= GetScreenWidth()-32.0f * Scale.X)
     {
-        Position.X = GetScreenWidth()-32.0f;
+        Position.X = GetScreenWidth()-32.0f * Scale.X;
         Velocity.X *= -0.95f; // Bounce off the right edge.
     }
-    if( Position.Y < 32.0f )
+    if( Position.Y < 32.0f * Scale.X)
     {
-        Position.Y = 32.0f;
+        Position.Y = 32.0f * Scale.X;
         Velocity.X *= 0.95f; // Slow down horizontal velocity.
         Velocity.Y *= -0.95f; // Bounce off the top.
     }
-    if( Position.Y >= GetScreenHeight()-32.0f )
+    if( Position.Y >= GetScreenHeight()-32.0f * Scale.X)
     {
-        Position.Y = GetScreenHeight()-32.0f;
+        Position.Y = GetScreenHeight()-32.0f * Scale.X;
         Velocity.X *= 0.95f; // Slow down horizontal velocity.
         Velocity.Y *= -0.95f; // Bounce off the bottom.
     }
