@@ -41,7 +41,7 @@ private:
     CBall* Ball = nullptr;
 
     CPlayer* Player = nullptr;
-    CCollision* PlayerCollision = nullptr;
+    
 
-    CFloor* Floor = nullptr;
+    
 };

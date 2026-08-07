@@ -9,8 +9,8 @@ public:
 
 	bool is_colliding(float topLeftX, float topRightX, float topLeftY, float bottomLeftY);
 	void drawCollision(Color color);
-	void setCollision(vec2 topLeft, vec2 topRight, vec2 bottomLeft, vec2 bottomRight);
-	vec2 getCollisionPoint(int whichPoint);
+	void setCollision(vec2 center, float width, float hight);
+	vec2 getCollisionPoint(int whichPoint) const;
 
 private:
 	vec2 TopLeft;

@@ -44,6 +44,8 @@ public:
     int getSpriteSize();
     void loadAnimation(std::string ani_name, int num_frame, float fps);
 
+    // collision
+
 private:
 
     Texture2D Texture;
@@ -57,21 +59,20 @@ private:
 
 };
 
-class CFloor
+class CBlock
 {
 public:
-    CFloor();
-    ~CFloor();
-    vec2 getPoint(int whichPoint);
+    CBlock(vec2 posistion, float width, float hight);
+    ~CBlock();
     void draw();
+
+    CCollision* Collision;
 
 private:
     vec2 Position;
-    vec2 TopLeft;
-    vec2 TopRight;
-    vec2 BottomLeft;
-    vec2 BottomRight;
-    CCollision* Collision;
+    float Width = 0.0f;
+    float Hight = 0.0f;
+
 
 };
 

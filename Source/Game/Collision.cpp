@@ -27,15 +27,15 @@ void CCollision::drawCollision(Color color)
 	DrawLineEx(BottomLeft, BottomRight, 3.0, color);
 }
 
-void CCollision::setCollision(vec2 topLeft, vec2 topRight, vec2 bottomLeft, vec2 bottomRight)
+void CCollision::setCollision(vec2 center, float width, float hight)
 {
-	TopLeft = topLeft;
-	TopRight = topRight;
-	BottomLeft = bottomLeft;
-	BottomRight = bottomRight;
+	TopLeft = { (center.X - width / 2.0f), (center.Y - hight / 2.0f) };
+	TopRight = { (center.X + width / 2.0f), (center.Y - hight / 2.0f) };
+	BottomLeft = { (center.X - width / 2.0f), (center.Y + hight / 2.0f) };
+	BottomRight = { (center.X + width / 2.0f), (center.Y + hight / 2.0f) };
 }
 
-vec2 CCollision::getCollisionPoint(int whichPoint)
+vec2 CCollision::getCollisionPoint(int whichPoint) const
 {
 	switch (whichPoint)
 	{

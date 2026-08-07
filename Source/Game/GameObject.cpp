@@ -75,6 +75,14 @@ void CPlayer::update(float deltaTime)
             flip = false;
         }
     }
+    if (Position.X < 11.0f * Scale.X)
+    {
+        Position.X = 11.0f * Scale.X;
+    }
+    else if (Position.X >= GetScreenWidth() - 11.0f * Scale.X)
+    {
+        Position.X = GetScreenWidth() - 11.0f * Scale.X;
+    }
 }
 
 void CPlayer::draw()
@@ -123,47 +131,19 @@ void CPlayer::loadAnimation(std::string ani_name, int num_frame, float fps)
 }
 
 
-CFloor::CFloor()
+CBlock::CBlock(vec2 posistion, float width, float hight) :
+    Position(posistion), Width(width), Hight(hight)
 {
-    Position.X = GetScreenWidth() / 2.0;
-    Position.Y = GetScreenHeight();
-    TopLeft = vec2(0.0, GetScreenHeight() - 10.0);
-    TopRight = vec2(GetScreenWidth(), GetScreenHeight() - 10.0);
-    BottomLeft = vec2(0.0, GetScreenHeight());
-    BottomRight = vec2(GetScreenWidth(), GetScreenHeight());
     Collision = new CCollision();
-    Collision->setCollision(TopLeft, TopRight, BottomLeft, BottomRight);
+    Collision->setCollision(Position, Width, Hight);
 }
 
-CFloor::~CFloor()
+CBlock::~CBlock()
 {
 }
 
-vec2 CFloor::getPoint(int whichPoint)
-{
-    switch (whichPoint)
-    {
-    case 1:
-        return TopLeft;
-        break;
-    case 2:
-        return TopRight;
-        break;
-    case 3:
-        return BottomLeft;
-        break;
-    case 4:
-        return BottomRight;
-        break;
-    default:
-        break;
-    }
-    return vec2();
-}
 
-
-void CFloor::draw()
+void CBlock::draw() // upload texture to draw
 {
-    DrawRectangle(0.0, GetScreenHeight() - 10, GetScreenWidth(), 10, BLUE);
-    Collision->drawCollision(RED);
+    
 }
