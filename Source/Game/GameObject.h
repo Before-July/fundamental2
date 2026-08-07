@@ -24,11 +24,15 @@ public:
 
 protected:
     vec2 Position;
-    float Angles = 0;
+    float Angles = 0.0f;
     vec2 Scale = 4;
-    float Direction = 0;
+    float Direction = 0.0f;
+    vec2 faceDirection;
     bool flip = false;
     Color ObjectColor = RED;
+    bool CanDash = false;
+    float DashTimer = 0.1f;
+    float DashCoolDownTimer = 0.3f;
 };
 
 
@@ -56,7 +60,8 @@ private:
     float AnimationTimer = 0.0f;
     int FrameCount = 0;
     float MoveSpeed = 300.0f;
-
+    float DashSpeed = 2000.0f;
+    
 };
 
 class CBlock

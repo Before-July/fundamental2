@@ -29,6 +29,10 @@ void CGameObject::onKey(int keyCode, KeyState keyState)
     {
         Direction--;
     }
+    if (keyCode == KEY_K && keyState == KeyState::Pressed)
+    {
+        CanDash = true;
+    }
 }
 
 vec2 CGameObject::getPosition()
@@ -56,17 +60,19 @@ CPlayer::~CPlayer()
 
 void CPlayer::update(float deltaTime)
 {
-    vec2 directionVec = { Direction, 0 };
-    directionVec.normalize();
-    Position.X += directionVec.X * MoveSpeed * deltaTime;
-    if(directionVec.X == 0)
+    
+    if (Direction != 0)
+    {
+        faceDirection.X = Direction;
+    }
+    if(Direction == 0)
     {
         loadAnimation("idle", 4, 3.0);
     }
     else
     {
         loadAnimation("run", 4, 15.0);
-        if(directionVec.X < 0 )
+        if(faceDirection.X < 0 )
         {
             flip = true;
         }
@@ -82,6 +88,27 @@ void CPlayer::update(float deltaTime)
     else if (Position.X >= GetScreenWidth() - 11.0f * Scale.X)
     {
         Position.X = GetScreenWidth() - 11.0f * Scale.X;
+    }
+    if (CanDash && DashTimer > 0.0f)
+    {
+        Position.X += faceDirection.X * DashSpeed * deltaTime;
+        DashTimer -= deltaTime;
+        loadAnimation("run", 4, 15.0);
+        if (DashTimer <= 0.0f) // finish dash
+        {
+            CanDash = false;
+            DashCoolDownTimer = 0.3f;
+        }
+    }
+    else
+    {
+        Position.X += Direction * MoveSpeed * deltaTime;
+        DashCoolDownTimer -= deltaTime;
+        if (DashCoolDownTimer < 0.0f)
+        {
+            DashTimer = 0.1f;
+            DashCoolDownTimer == 0.0;
+        }
     }
 }
 
