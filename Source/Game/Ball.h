@@ -5,7 +5,7 @@
 #include "Helpers/InputTypes.h"
 #include "Helpers/Vector.h"
 
-class CGame;
+class CGamePlay;
 class Sprite2D;
 
 class CBall

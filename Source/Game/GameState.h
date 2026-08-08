@@ -12,6 +12,7 @@
 #include "GameObject.h"
 #include "Bullet.h"
 
+class CBall;
 
 class CGameState
 {
