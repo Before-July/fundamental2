@@ -12,6 +12,12 @@
 #include "GameObject.h"
 #include "Bullet.h"
 
+enum class GameState
+{
+    Title,
+    GamePlay,
+    Result
+};
 
 class CBall;
 class CPlayer;
@@ -31,24 +37,6 @@ public:
     void onMouseButton(int button, KeyState keyState);
     void onMouseMove(float x, float y);
 
-    // Getters.
-    CBall* spawnBall(vec2 position, vec2 velocity);
-
-    Texture2D getTexture(const char* textureName) const;
-
 private:
 
-    const int num_bullet = 3;
-
-    std::unordered_map<std::string, Texture2D> Textures;
-
-    CPlayer* Player = nullptr;
-    
-    std::vector<CBall*> BallPool;
-    std::vector<CBall*> ActiveBall;
-
-    //CBullet* bullet = nullptr;
-    std::vector<CBullet*> Bullet;
-
-    static const int num_MaxBalls = 20;
 };

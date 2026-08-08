@@ -1,17 +1,17 @@
 ﻿#include "Ball.h"
-#include "Game.h"
+
 #include "Helpers/MathFuncs.h"
 #include "Helpers/Sprite2D.h"
 
-CBall::CBall(CGame* game)
-    : Game( game )
+CBall::CBall(CGamePlay* gameplay)
+    : GameState(gameplay)
 {
     Active = true;
 
     Radius = 20.0f;
     Scale = 1.0f;
 
-    Sprite = new Sprite2D( Game->getTexture("SoccerBall") );
+    Sprite = new Sprite2D( GameState->getTexture("SoccerBall") );
 }
 
 CBall::~CBall()

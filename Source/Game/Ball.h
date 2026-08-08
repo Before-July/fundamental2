@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-
+#include "GameState.h"
 #include "Helpers/InputTypes.h"
 #include "Helpers/Vector.h"
 
@@ -11,7 +11,7 @@ class Sprite2D;
 class CBall
 {
 public:
-    CBall(CGame* game);
+    CBall(CGamePlay* gameplay);
     ~CBall();
 
     void reset();
@@ -36,7 +36,7 @@ public:
     void setVelocity(vec2 vel)   { Velocity = vel; }
 
 private:
-    CGame* Game = nullptr;
+    CGamePlay* GameState = nullptr;
 
     bool Active = false;
 

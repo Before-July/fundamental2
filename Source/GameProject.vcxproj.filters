@@ -24,6 +24,7 @@
     <ClCompile Include="StampsGame\StampsGame.cpp" />
     <ClCompile Include="Game\Collision.cpp" />
     <ClCompile Include="Game\Bullet.cpp" />
+    <ClCompile Include="Game\GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helpers\InputTypes.h">
@@ -52,6 +53,7 @@
     <ClInclude Include="StampsGame\StampsGame.h" />
     <ClInclude Include="Game\Collision.h" />
     <ClInclude Include="Game\Bullet.h" />
+    <ClInclude Include="Game\GameState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
